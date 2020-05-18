@@ -119,14 +119,25 @@ func main {
 
 	//need to code the logistics of each sports game here. 
 
+	nameOfSportGame = selectedSport
+	lat = 34.4640
+	long = 119.1823
+	time = "3:15"
+	notes = "wear blue"
 
-	eventData = append(eventData, Event{
-		SportsName: 
-		Lat:
-		Long:
-		Time:
-		Notes: 
-	})
+	if nameOfSportGame == selectedSport {
+		
+		eventData = append(eventData, Event{
+			SportsName: nameOfSportGame
+			Lat: lat
+			Long: long
+			Time: time
+			Notes: notes
+		})
+		break
+	}
+
+
 	//we gotta figure out how each of the variables under the Event struct are going to be defined. 
 }
 
