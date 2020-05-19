@@ -19,27 +19,30 @@ import (
 
 var seatingJson = []byte{}
 
-var Sports [18]string {
-	Sports[0] = "Baseball"
-	Sports[1] = "Boys Lacrosse"
-	Sports[2] = "Girls Lacrosse"
-	Sports[3] = "Boys Tennis"
-	Sports[4] = "Girls Tennis"
-	Sports[5] = "Boys Volleyball"
-	Sports[6] = "Girls Volleyball"
-	Sports[7] = "Swimming"
-	Sports[8] = "Track kand Field"
-	Sports[9] = "Boys Waterpolo"
-	Sports[10] = "Girls Waterpolo"
-	Sports[11] = "Football"
-	Sports[12] = "Cross Country"
-	Sports[13] = "Boys Basketball"
-	Sports[14] = "Girls Basketball"
-	Sports[15] = "Boys Soccer"
-	Sports[16] = "Girls Soccer"
-	Sports[17] = "Squash"
-	Sports[18] = "Ultimate Frisbee" 
-}
+
+// Sports := [...]string {
+	
+// 	Sports[0] = "Baseball"
+// 	Sports[1] = "Boys Lacrosse"
+// 	Sports[2] = "Girls Lacrosse"
+// 	Sports[3] = "Boys Tennis"
+// 	Sports[4] = "Girls Tennis"
+// 	Sports[5] = "Boys Volleyball"
+// 	Sports[6] = "Girls Volleyball"
+// 	Sports[7] = "Swimming"
+// 	Sports[8] = "Track and Field"
+// 	Sports[9] = "Boys Waterpolo"
+// 	Sports[10] = "Girls Waterpolo"
+// 	Sports[11] = "Football"
+// 	Sports[12] = "Cross Country"
+// 	Sports[13] = "Boys Basketball"
+// 	Sports[14] = "Girls Basketball"
+// 	Sports[15] = "Boys Soccer"
+// 	Sports[16] = "Girls Soccer"
+// 	Sports[17] = "Squash"
+// 	Sports[18] = "Ultimate Frisbee" 
+// }
+
 
 //the struct below might have to be called selection
 type Event struct {
@@ -53,13 +56,16 @@ type Event struct {
 
 }
 
-var game = []Sports{}
+var game = Sports
 var eventData = []Event{}
 var sportJson = []byte{}
 
 
 
 func handlerBySport(w http.ResponseWriter, r *http.Request) {
+	
+	Sports := [...]string {"Baseball", "Boys Lacrosse", "Girls Lacrosse", "Boys Tennis", "Girls Tennis", "Boys Volleyball", "Girls Volleyball", "Swimming", "Track and Field", "Boys Waterpolo", "Girls Waterpolo", "Football", "Cross Country", "Boys Basketball", "Girls Basketball", "Boys Soccer", "Girls Soccer", "Squash", "Ultimate Frisbee"}
+	
 	// info
 	fmt.Println("Handler for Sport - Incoming Request: ")
 	fmt.Println("Method: ", r.Method, " ", r.URL)
@@ -83,6 +89,9 @@ func handlerBySport(w http.ResponseWriter, r *http.Request) {
 			selectedSport = game[index].Sports
 			break
 		}
+	} 
+	if selectedSport == "" {
+		fmt.Println("error")
 	}
 		//seperate sport name from URL - ex: "Boys Basketball"
 	//search through array "game" and find struct with with specific sport name
@@ -92,11 +101,11 @@ func handlerBySport(w http.ResponseWriter, r *http.Request) {
 
 	for index, _ := range game {
 		if game[index].Sports== selectedSport {
-			currentSportData = append(currentSportsData, eventData[index].SportsName) //append name of sport of game
-			currentSportData = append(currentSportsData, eventData[index].Lat) //append Latittude of game
-			currentSportData = append(currentSportsData, eventData[index].Long)// append Long. of game)
-			currentSportData = append(currentSportsData, eventData[index].Time)//append Time of game)
-			currentSportData = append(currentSportsData, eventData[index].Time)//append Notes of game)
+			currentSportData = append(currentSportData, eventData[index].SportsName) //append name of sport of game
+			currentSportData = append(currentSportData, eventData[index].Lat) //append Latittude of game
+			currentSportData = append(currentSportData, eventData[index].Long)// append Long. of game)
+			currentSportData = append(currentSportData, eventData[index].Time)//append Time of game)
+			currentSportData = append(currentSportData, eventData[index].Notes)//append Notes of game)
 		} 
 		break
 	}
@@ -119,11 +128,6 @@ func main {
 
 	//need to code the logistics of each sports game here. 
 
-	nameOfSportGame = selectedSport
-	lat = 34.4640
-	long = 119.1823
-	time = "3:15"
-	notes = "wear blue"
 
 	if nameOfSportGame == selectedSport {
 		
@@ -137,6 +141,7 @@ func main {
 		break
 	}
 
+	fmt.Fprintln(currentSportData)
 
 	//we gotta figure out how each of the variables under the Event struct are going to be defined. 
 }
